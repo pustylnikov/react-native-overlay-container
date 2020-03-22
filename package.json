@@ -10,10 +10,11 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "build": "rm -rf ./dist && tsc --project tsconfig.app.json",
-    "release": "npm run build && npm publish --access public --dry-run",
+    "build": "yarn run lint && rm -rf ./dist && tsc --project tsconfig.app.json",
+    "release": "yarn run build && npm publish --access public --dry-run",
     "test": "jest",
-    "lint": "eslint example"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "peerDependencies": {
     "react": "^16.9",
@@ -28,16 +29,22 @@
     "@types/react-native": "^0.61.23",
     "@types/react-test-renderer": "^16.9.2",
     "babel-jest": "^24.9.0",
-    "react": "16.9.0",
-    "react-native": "0.61.5",
     "eslint": "^6.5.1",
+    "husky": "^4.2.3",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
+    "react": "16.9.0",
+    "react-native": "0.61.5",
     "react-test-renderer": "16.9.0",
     "typescript": "^3.8.3"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run lint"
+    }
   },
   "files": [
     "dist/*"
