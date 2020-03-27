@@ -36,12 +36,18 @@ class OverlayContainer extends Component<Props, State> {
 
     /**
      *
-     * @param prevProps
+     * @param nextProps
+     * @param nextState
      */
-    componentDidUpdate(prevProps: Props): void {
-        if (prevProps.visible !== this.props.visible) {
-            this.props.visible ? this.show() : this.hide();
+    shouldComponentUpdate(nextProps: Readonly<Props>, nextState: Readonly<State>): boolean {
+        if (
+            this.props.visible !== nextProps.visible ||
+            (this.state.visible !== nextProps.visible && this.state.visible === nextState.visible)
+        ) {
+            nextProps.visible ? this.show() : this.hide();
+            return false;
         }
+        return this.state.visible !== nextState.visible;
     }
 
     /**

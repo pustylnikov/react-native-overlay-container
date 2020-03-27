@@ -13,14 +13,24 @@
     "build": "yarn run lint && rm -rf ./dist && tsc --project tsconfig.app.json",
     "release": "yarn run build && npm publish --access public --dry-run",
     "test": "jest",
+    "pod-install": "cd ios && pod install",
+    "reinstall-modules": "rm -rf node_modules && yarn",
+    "prettier": "prettier --write './**/*.{ts,tsx,js,jsx}'",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
+    "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "reset-cache": "yarn start --reset-cache",
+    "delete-metro-tmp": "rm -rf /tmp/metro-*",
+    "clean-android": "cd android && ./gradlew clean && ./gradlew cleanBuildCache && rm -rf ./android/app/build ./android/build",
+    "clean-ios": "rm -rf ./ios/build",
+    "debugger": "rndebugger --port=8788 --socketPort=8787"
   },
   "peerDependencies": {
     "react": "^16.9",
     "react-native": ">=0.60 <0.62"
   },
   "devDependencies": {
+    "@anvilapp/react-native-debugger-client": "^1.2.0",
+    "@anvilapp/react-native-debugger-server": "^1.0.3",
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",

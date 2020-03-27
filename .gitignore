@@ -58,4 +58,6 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-/dist
+dist/
+
+env.js

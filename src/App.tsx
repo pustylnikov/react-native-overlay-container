@@ -13,6 +13,8 @@ class App extends Component<Props, State> {
         visible: true,
     };
 
+    containerRef: null | OverlayContainer = null;
+
     render() {
         return (
             <View style={styles.container}>
@@ -25,8 +27,17 @@ class App extends Component<Props, State> {
                             this.setState({ visible: true });
                         }}
                     />
+                    <Button
+                        title="SHOW with REF"
+                        onPress={() => {
+                            this.containerRef && this.containerRef.show();
+                        }}
+                    />
                 </SafeAreaView>
                 <OverlayContainer
+                    ref={(ref) => {
+                        this.containerRef = ref;
+                    }}
                     fadeInDuration={500}
                     fadeOutDuration={500}
                     visible={this.state.visible}
@@ -37,6 +48,12 @@ class App extends Component<Props, State> {
                         title="HIDE"
                         onPress={() => {
                             this.setState({ visible: false });
+                        }}
+                    />
+                    <Button
+                        title="HIDE with REF"
+                        onPress={() => {
+                            this.containerRef && this.containerRef.hide();
                         }}
                     />
                 </OverlayContainer>
